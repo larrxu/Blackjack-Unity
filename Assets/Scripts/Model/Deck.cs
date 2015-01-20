@@ -6,7 +6,7 @@ namespace Model
     public class Deck
     {
 
-        private Card[] cards;
+        private Card[] cards = new Card[52];
         private int dealIndex;
 
         public Deck()
