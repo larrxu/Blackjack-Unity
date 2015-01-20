@@ -15,13 +15,13 @@ namespace Model
             {
                 for (int rank = 1; rank <= 13; rank++)
                 {
-                    cards [(int)suit * rank - 1] = new Card(suit, rank);
+                    cards [(int)suit * 13 + rank - 1] = new Card(suit, rank);
                 }
             }
             Shuffle();
         }
 
-        void Shuffle()
+        public void Shuffle()
         {
             dealIndex = 0;
             for (int currIndex = 0; currIndex < 51; currIndex++)
@@ -33,8 +33,12 @@ namespace Model
             }
         }
 
-        Card Deal()
+        public Card Deal()
         {
+            if (dealIndex > 51)
+            {
+                Shuffle();
+            }
             return cards [dealIndex++];
         }
     }
