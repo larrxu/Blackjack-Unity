@@ -2,69 +2,72 @@
 using System.Collections;
 using System;
 
-public class Player
+namespace Model
 {
-    private int cash;
-    private int bet;
-
-    public string Name { get; set; }
-
-    public Hand Hand { get; set; }
-
-    public int Bet
+    public class Player
     {
-        get
+        private int cash;
+        private int bet;
+
+        public string Name { get; set; }
+
+        public Hand Hand { get; set; }
+
+        public int Bet
         {
-            return bet;
-        }
-        set
-        {
-            if (value < 0)
+            get
             {
-                bet = 0;
-            } else
+                return bet;
+            }
+            set
             {
-                bet = value;
+                if (value < 0)
+                {
+                    bet = 0;
+                } else
+                {
+                    bet = value;
+                }
             }
         }
-    }
 
-    public int Cash
-    {
-        get
+        public int Cash
         {
-            return cash;
-        }
-        set
-        {
-            if (value < 0)
+            get
             {
-                cash = 0;
-            } else
+                return cash;
+            }
+            set
             {
-                cash = value;
+                if (value < 0)
+                {
+                    cash = 0;
+                } else
+                {
+                    cash = value;
+                }
             }
         }
-    }
 
-    public Player(string name, int cash)
-    {
-        Hand = new Hand();
-        Name = name;
-        this.cash = cash;
-    }
+        public Player(string name, int cash)
+        {
+            Hand = new Hand();
+            Name = name;
+            this.cash = cash;
+        }
 
-    public bool betCash(int amount)
-    {
-        if (amount <= 0)
+        public bool betCash(int amount)
         {
-            throw new ArgumentException("Invalid bet amount:" + amount);
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Invalid bet amount:" + amount);
+            }
+            if (cash < amount)
+            {
+                return false;
+            }
+            cash -= amount;
+            return true;
         }
-        if (cash < amount)
-        {
-            return false;
-        }
-        cash -= amount;
-        return true;
     }
 }

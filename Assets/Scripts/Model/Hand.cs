@@ -2,23 +2,25 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Hand
+namespace Model
 {
-    private readonly List<Card> cards;
-
-    public Hand()
+    public class Hand
     {
-        cards = new List<Card>();
-    }
+        private readonly List<Card> cards;
 
-    public void addCard(Card card)
-    {
-        cards.Add(card);
-    }
+        public Hand()
+        {
+            cards = new List<Card>();
+        }
 
-    public void reset()
-    {
-        cards.RemoveAll();
+        public void addCard(Card card)
+        {
+            cards.Add(card);
+        }
+
+        public void reset()
+        {
+            cards.RemoveAll();
+        }
     }
 }
-

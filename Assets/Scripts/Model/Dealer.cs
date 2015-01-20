@@ -1,13 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public class Dealer : MonoBehaviour
+namespace Model
 {
-    public Hand Hand { get; set; }
-
-    public Dealer()
+    public class Dealer : MonoBehaviour
     {
-        Hand = new Hand();
+        public Hand Hand { get; set; }
+
+        public Dealer()
+        {
+            Hand = new Hand();
+        }
     }
 }
-
