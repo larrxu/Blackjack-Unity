@@ -20,7 +20,7 @@ namespace Model
 
         public void reset()
         {
-            cards.RemoveAll();
+            cards.Clear();
         }
     }
 }
