@@ -1,38 +1,41 @@
 using UnityEngine;
 using System.Collections;
 
-public class Deck
+namespace Model
 {
-
-    private Card[] cards;
-    private int dealIndex;
-
-    public Deck()
+    public class Deck
     {
-        foreach (Suit suit in (Suit[]) System.Enum.GetValues(typeof(Suit)))
+
+        private Card[] cards;
+        private int dealIndex;
+
+        public Deck()
         {
-            for (int rank = 1; rank <= 13; rank++)
+            foreach (Suit suit in (Suit[]) System.Enum.GetValues(typeof(Suit)))
             {
-                cards [(int)suit * rank - 1] = new Card(suit, rank);
+                for (int rank = 1; rank <= 13; rank++)
+                {
+                    cards [(int)suit * rank - 1] = new Card(suit, rank);
+                }
+            }
+            Shuffle();
+        }
+
+        void Shuffle()
+        {
+            dealIndex = 0;
+            for (int currIndex = 0; currIndex < 51; currIndex++)
+            {
+                int targetIndex = Random.Range(currIndex, 52);
+                Card temp = cards [currIndex];
+                cards [currIndex] = cards [targetIndex];
+                cards [targetIndex] = temp;
             }
         }
-        Shuffle();
-    }
 
-    void Shuffle()
-    {
-        dealIndex = 0;
-        for (int currIndex = 0; currIndex < 51; currIndex++)
+        Card Deal()
         {
-            int targetIndex = Random.Range(currIndex, 52);
-            Card temp = cards [currIndex];
-            cards [currIndex] = cards [targetIndex];
-            cards [targetIndex] = temp;
+            return cards [dealIndex++];
         }
-    }
-
-    Card Deal()
-    {
-        return cards [dealIndex++];
     }
 }
