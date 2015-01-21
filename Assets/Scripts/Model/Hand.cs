@@ -13,14 +13,22 @@ namespace Model
             cards = new List<Card>();
         }
 
-        public void addCard(Card card)
+        public void AddCard(Card card)
         {
             cards.Add(card);
         }
 
-        public void reset()
+        public void Reset()
         {
             cards.Clear();
+        }
+
+        public int Size
+        {
+            get
+            {
+                return cards.Count;
+            }
         }
     }
 }
