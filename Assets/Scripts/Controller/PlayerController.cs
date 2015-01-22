@@ -8,7 +8,7 @@ namespace Controller
 {
     public class PlayerController : MonoBehaviour
     {
-        public PlayerController DealerController;
+        public DealerController DealerController;
         // Views
         public GameObject CardPrefab;
         public GameObject BetGameObject;

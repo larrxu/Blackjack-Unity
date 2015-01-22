@@ -8,6 +8,7 @@ namespace Controller
     public class GameController : MonoBehaviour
     {
         public PlayerController PlayerController;
+        public DealerController DealerController;
 
         public GameState GameState { get; set; }
 
@@ -15,6 +16,7 @@ namespace Controller
 
         void Awake()
         {
+            DealerController.Dealer = new Dealer();
             PlayerController.Player = new Player("lex", 123);
             deck = new Deck();
         }
@@ -34,6 +36,8 @@ namespace Controller
             while (true)
             {
                 PlayerController.AddCard(deck.Deal());
+                yield return new WaitForSeconds(2);
+                DealerController.AddCard(deck.Deal());
                 yield return new WaitForSeconds(2);
             }
         }

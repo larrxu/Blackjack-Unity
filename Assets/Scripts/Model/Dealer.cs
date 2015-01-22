@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Model
 {
-    public class Dealer : MonoBehaviour
+    public class Dealer
     {
         public Hand Hand { get; set; }
 
