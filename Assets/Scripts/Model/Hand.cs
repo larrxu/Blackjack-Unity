@@ -8,6 +8,8 @@ namespace Model
     {
         private readonly List<Card> cards;
 
+        public List<Card> Cards { get { return cards; } }
+
         public Hand()
         {
             cards = new List<Card>();

@@ -11,7 +11,7 @@ namespace Animation
         public float TimeTakenDuringLerp = 1f;
 
         //Whether we are currently interpolating or not
-        private bool _isLerping;
+        private bool _isLerping = false;
 
         //The start and finish positions for the interpolation
         private Vector3 _startPosition;
@@ -23,21 +23,47 @@ namespace Animation
         /// <summary>
         /// Called to begin the linear interpolation
         /// </summary>
-        public void StartLerping(Vector3 endPosition)
+        public IEnumerator StartLerping(Vector3 endPosition)
         {
             if (_isLerping)
             {
-                return;
-            }
-            _isLerping = true;
-            _timeStartedLerping = Time.time;
+                yield return null;
+            } else
+            {
+                _isLerping = true;
+                _timeStartedLerping = Time.time;
             
-            _startPosition = transform.position;
-            _endPosition = endPosition;
+                _startPosition = transform.position;
+                _endPosition = endPosition;
+
+                float percentageComplete = 0;
+                do
+                {
+                    //We want percentage = 0.0 when Time.time = _timeStartedLerping
+                    //and percentage = 1.0 when Time.time = _timeStartedLerping + timeTakenDuringLerp
+                    //In other words, we want to know what percentage of "timeTakenDuringLerp" the value
+                    //"Time.time - _timeStartedLerping" is.
+                    float timeSinceStarted = Time.time - _timeStartedLerping;
+                    percentageComplete = timeSinceStarted / TimeTakenDuringLerp;
+                    
+                    //Perform the actual lerping.  Notice that the first two parameters will always be the same
+                    //throughout a single lerp-processs (ie. they won't change until we hit the space-bar again
+                    //to start another lerp)
+                    transform.position = Vector3.Lerp(_startPosition, _endPosition, percentageComplete);
+                    yield return null;
+                } while (_isLerping && percentageComplete < 1.0f);
+                _isLerping = false;
+            }
         }
+
+        public void StopLerping()
+        {
+            _isLerping = false;
+        }
+
         
         //We do the actual interpolation in FixedUpdate(), since we're dealing with a rigidbody
-        void FixedUpdate()
+        void aFixedUpdate()
         {
             if (_isLerping)
             {

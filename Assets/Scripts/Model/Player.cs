@@ -13,23 +13,7 @@ namespace Model
 
         public Hand Hand { get; set; }
 
-        public int Bet
-        {
-            get
-            {
-                return bet;
-            }
-            set
-            {
-                if (value < 0)
-                {
-                    bet = 0;
-                } else
-                {
-                    bet = value;
-                }
-            }
-        }
+        public int Bet { get { return bet; } }
 
         public int Cash
         {
@@ -51,12 +35,23 @@ namespace Model
 
         public Player(string name, int cash)
         {
+            bet = 0;
             Hand = new Hand();
             Name = name;
             this.cash = cash;
         }
 
-        public bool betCash(int amount)
+        public void ResetBet()
+        {
+            bet = 0;
+        }
+
+        public void AddCash(int amount)
+        {
+            cash += amount;
+        }
+
+        public bool BetCash(int amount)
         {
             if (amount <= 0)
             {
@@ -67,6 +62,7 @@ namespace Model
                 return false;
             }
             cash -= amount;
+            bet += amount;
             return true;
         }
     }

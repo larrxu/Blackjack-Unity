@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 617f3c99406c65042901454ebc2a4a8c
+=======
+guid: d357c5239330584459df6e16c20d1c49
+>>>>>>> Develop game logic in GameController
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []
