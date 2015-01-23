@@ -56,7 +56,7 @@ namespace Controller
                         }
                     case State.CheckBlackjack:
                         {
-                            if (isBlackjack(PlayerController.Player.Hand))
+                            if (IsBlackjack(PlayerController.Player.Hand))
                             {
                                 // blackjack, player wins!
                                 GameState = new GameState(State.ProcessResult, GameResult.DealerLoseToBlackjack);
@@ -225,7 +225,9 @@ namespace Controller
             return CalculateHand(hand) > 21;
         }
 
-        private bool isBlackjack(Hand hand)
+        // public for unit test
+        // TODO: we probably want to move majority of the code to another class that doesn't inherit MonoBehaviour
+        public bool IsBlackjack(Hand hand)
         {
             return CalculateHand(hand) == 21 && hand.Size == 2;
         }
