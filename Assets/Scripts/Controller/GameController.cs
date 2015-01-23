@@ -97,8 +97,14 @@ namespace Controller
                         }
                     case State.ProcessResult:
                         {
-                            DealerController.showSecondCard();
                             GameResult gameResult = (GameResult)GameState.Data;
+                            if (gameResult == GameResult.DealerLoseToBlackjack)
+                            {
+                                GameResultText.GetComponent<Text>().text = "Dealer Lose To Blackjack";
+                            } else
+                            {
+                                DealerController.showSecondCard();
+                            }
                             if (gameResult == GameResult.DealerLose)
                             {
                                 GameResultText.GetComponent<Text>().text = "Dealer Lose";
@@ -108,9 +114,6 @@ namespace Controller
                             } else if (gameResult == GameResult.Tie)
                             {
                                 GameResultText.GetComponent<Text>().text = "Tie";
-                            } else if (gameResult == GameResult.DealerLoseToBlackjack)
-                            {
-                                GameResultText.GetComponent<Text>().text = "Dealer Lose To Blackjack";
                             }
                             
                             // Clean up...
